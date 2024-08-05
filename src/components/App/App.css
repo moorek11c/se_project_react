@@ -1,0 +1,9 @@
+.page {
+  background-color: #f3f3f3;
+  font-family: "Cabinet Grotesk Regular", "Inter", sans-serif;
+}
+
+.page__wrapper {
+  max-width: 1360px;
+  margin: 0 auto;
+}

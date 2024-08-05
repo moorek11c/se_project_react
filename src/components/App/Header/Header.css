@@ -1,0 +1,61 @@
+.header {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  max-width: 1360px;
+  height: 40px;
+  padding-top: 32px;
+  padding-bottom: 28px;
+  font-weight: 700;
+}
+
+.header__logo {
+  display: block;
+  width: 89px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.header__date-and-location {
+  position: relative;
+  margin-right: auto;
+  width: 100%;
+  padding-top: 10px;
+  height: 24px;
+}
+
+.header__add-clothes-btn {
+  display: inline-block;
+  line-height: 24px;
+  font-weight: 700;
+  font-family: "Cabinet Grotesk Regular", "Inter", sans-serif;
+  white-space: nowrap;
+  font-size: 20px;
+  height: 24px;
+  width: 116px;
+  border: none;
+  margin-right: 20px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* User Container */
+
+.header__user-container {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.header__username {
+  line-height: 24.8px;
+  white-space: nowrap;
+  padding-right: 12px;
+}
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+}
