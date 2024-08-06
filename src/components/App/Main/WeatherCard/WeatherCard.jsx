@@ -1,5 +1,5 @@
 import "./WeatherCard.css";
-import { weatherOptions } from "../../../../utils/constants";
+import { weatherOptions } from "../../../../utils/constants.js";
 function WeatherCard({ weatherData }) {
   const filterOptions = weatherOptions.filter((option) => {
     return (
@@ -8,14 +8,15 @@ function WeatherCard({ weatherData }) {
     );
   });
 
-  const weatherOption = filterOptions[0];
+  const weatherOptionUrl = filterOptions[0]?.url;
+  const weatherOptionCondition = filterOptions[0]?.condition;
 
   return (
     <section className="weather-card">
       <p className="weather-card__temp">{weatherData.temp.F}</p>
       <img
-        src={weatherOption?.url}
-        alt={weatherOption?.condition}
+        src={weatherOptionUrl}
+        alt={weatherOptionCondition}
         className="weather-card__image"
       />
     </section>
