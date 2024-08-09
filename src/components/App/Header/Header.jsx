@@ -1,6 +1,9 @@
+import React from "react";
 import "./Header.css";
 import logo from "../../../assets/wtwr°.svg";
 import avatar from "../../../assets/avatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
 function Header({ onAddButtonClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -12,6 +15,7 @@ function Header({ onAddButtonClick, weatherData }) {
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
+      <ToggleSwitch />
       <button
         onClick={onAddButtonClick}
         type="button"

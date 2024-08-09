@@ -9,27 +9,27 @@ export const weatherOptions = [
   },
   {
     day: true,
-    condition: "cloudy",
+    condition: "clouds",
     url: new URL("../assets/Day/Cloudy.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "rainy",
+    condition: "rain",
     url: new URL("../assets/Day/Rainy.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "stormy",
+    condition: "storm",
     url: new URL("../assets/Day/Storm.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "snowy",
+    condition: "snow",
     url: new URL("../assets/Day/Snow.png", import.meta.url).href,
   },
   {
     day: true,
-    condition: "foggy",
+    condition: "fog",
     url: new URL("../assets/Day/Foggy.png", import.meta.url).href,
   },
 
