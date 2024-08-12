@@ -16,8 +16,6 @@ function Main({ weatherData, handleCardClick }) {
   const temperature =
     currentTemperatureUnit === "F" ? weatherData.temp.F : weatherData.temp.C;
 
-  // gets the weather type based on the current temperature unit
-
   const result = weatherData;
   result.type = {
     F: getWeatherType(result.temp.F, "F"),

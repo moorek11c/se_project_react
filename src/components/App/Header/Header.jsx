@@ -3,6 +3,7 @@ import "./Header.css";
 import logo from "../../../assets/wtwr°.svg";
 import avatar from "../../../assets/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { Link } from "react-router-dom";
 
 function Header({ onAddButtonClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -24,7 +25,12 @@ function Header({ onAddButtonClick, weatherData }) {
         + Add clothes
       </button>
       <div className="header__user-container">
-        <p className="header__username">Ryan Moore</p>
+        <nav className="header__nav">
+          <Link className="header__username" to="/Profile">
+            {" "}
+            Ryan Moore{" "}
+          </Link>
+        </nav>
         <img className="header__avatar" src={avatar} alt="avatar" />
       </div>
     </header>

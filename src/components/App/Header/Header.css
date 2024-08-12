@@ -16,6 +16,7 @@
   width: 89px;
   height: 40px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .header__date-and-location {
@@ -54,6 +55,8 @@
   line-height: 24.8px;
   white-space: nowrap;
   padding-right: 12px;
+  text-decoration: none;
+  color: #000;
 }
 
 .header__avatar {

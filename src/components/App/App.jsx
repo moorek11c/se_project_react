@@ -1,11 +1,12 @@
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import "./App.css";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Footer from "./Footer/Footer";
 import ModalWithForm from "../App/ModalWithForm/ModalWithForm";
+import Profile from "./Profile/Profile";
 import ItemModal from "./ItemModal/ItemModal";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitProvider } from "./Contexts/CurrentTemperatureUnitContext";
@@ -23,20 +24,13 @@ function App() {
     isDay: true || false,
   });
 
-  //////////////////////////////////////////
-
   // sets the active modal
 
   const [activeModal, setActiveModal] = useState("");
 
-  //////////////////////////////////////////
-
   // sets the selected card
 
   const [selectedCard, setSelectedCard] = useState({});
-
-  // sets the current temperature unit
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   // handles the card click
 
@@ -55,15 +49,6 @@ function App() {
   const closeModalClick = () => {
     setActiveModal("");
   };
-
-  // toggles the temperature unit
-  // const handleToggleSwitchChange = () => {
-  //   if (currentTemperatureUnit === "F") {
-  //     setCurrentTemperatureUnit("C");
-  //   } else {
-  //     setCurrentTemperatureUnit("F");
-  //   }
-  // };
 
   // gets the weather data from the API and filters it
 
@@ -86,7 +71,19 @@ function App() {
             onAddButtonClick={onAddButtonClick}
             weatherData={weatherData}
           />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            />
+
+            <Route path="/Profile" element={<Profile />} />
+          </Routes>
           <Footer />
         </div>
         <ModalWithForm

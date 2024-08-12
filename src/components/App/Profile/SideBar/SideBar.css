@@ -1,0 +1,16 @@
+.sidebar__container {
+  display: flex;
+  margin-top: 19px;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  margin-right: 20px;
+}
+
+.sidebar__title {
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
