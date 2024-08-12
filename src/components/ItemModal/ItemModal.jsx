@@ -1,7 +1,9 @@
-import closeBtn from "../../../assets/CloseBtn.png";
+import closeBtn from "../../assets/images/CloseBtn.png";
 import "./ItemModal.css";
 
 function ItemModal({ activModal, closeModalClick, card }) {
+  console.log(`ItemModal activModal: ${activModal}`); // Debugging output
+
   return (
     <div className={`modal ${activModal === "preview" && "modal_opened"}`}>
       <div className="modal__container modal__container_preview">

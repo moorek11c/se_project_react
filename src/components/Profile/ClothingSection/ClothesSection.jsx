@@ -1,6 +1,5 @@
-import React from "react";
 import "./ClothesSection.css";
-import { defaultClothingItems } from "../../../../utils/constants.js";
+import { defaultClothingItems } from "../../../utils/constants.js";
 import ItemCard from "../../Main/ItemCard/ItemCard.jsx";
 
 export default function ClothesSection({ onAddNewClick }) {

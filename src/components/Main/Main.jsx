@@ -1,10 +1,10 @@
 import React from "react";
 import "./Main.css";
-import WeatherCard from "../Main/WeatherCard/WeatherCard.jsx";
-import ItemCard from "./ItemCard/ItemCard.jsx";
-import { defaultClothingItems } from "../../../utils/constants.js";
+import WeatherCard from "./WeatherCard/WeatherCard.jsx";
+import ItemCard from "../Main/ItemCard/ItemCard.jsx";
+import { defaultClothingItems } from "../../utils/constants";
 import CurrentTemperatureUnitContext from "../Contexts/CurrentTemperatureUnitContext.jsx";
-import { getWeatherType } from "../../../utils/weatherApi.js";
+import { getWeatherType } from "../../utils/weatherApi.js";
 
 function Main({ weatherData, handleCardClick }) {
   const { currentTemperatureUnit } = React.useContext(

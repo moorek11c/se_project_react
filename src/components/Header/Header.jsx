@@ -1,11 +1,10 @@
-import React from "react";
 import "./Header.css";
-import logo from "../../../assets/wtwr°.svg";
-import avatar from "../../../assets/avatar.svg";
+import logo from "../../assets/images/wtwr°.svg";
+import avatar from "../../assets/images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ onAddButtonClick, weatherData }) {
+function Header({ weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -17,11 +16,7 @@ function Header({ onAddButtonClick, weatherData }) {
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      <button
-        onClick={onAddButtonClick}
-        type="button"
-        className="header__add-clothes-btn"
-      >
+      <button type="button" className="header__add-clothes-btn">
         + Add clothes
       </button>
       <div className="header__user-container">
@@ -36,5 +31,4 @@ function Header({ onAddButtonClick, weatherData }) {
     </header>
   );
 }
-
 export default Header;
