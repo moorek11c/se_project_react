@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useContext } from "react";
 import "./Main.css";
 import WeatherCard from "./WeatherCard/WeatherCard.jsx";
 import ItemCard from "../Main/ItemCard/ItemCard.jsx";
@@ -7,10 +7,7 @@ import CurrentTemperatureUnitContext from "../Contexts/CurrentTemperatureUnitCon
 import { getWeatherType } from "../../utils/weatherApi.js";
 
 function Main({ weatherData, handleCardClick }) {
-  const { currentTemperatureUnit } = React.useContext(
-    CurrentTemperatureUnitContext
-  );
-  const [selectedItem, setSelectedItem] = useState(null);
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const result = { ...weatherData };
   result.type = {
@@ -40,7 +37,6 @@ function Main({ weatherData, handleCardClick }) {
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
-                  selectedItem={selectedItem}
                 />
               );
             })}

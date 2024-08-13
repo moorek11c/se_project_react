@@ -3,13 +3,13 @@ import "./Profile.css";
 import SideBar from "./SideBar/SideBar.jsx";
 import ClothingSection from "./ClothingSection/ClothesSection.jsx";
 
-export default function Profile() {
+export default function Profile({ onCardClick }) {
   return (
     <div className="profile">
       <div className="profile__wrapper">
         <Link to="/Profile"></Link>
         <SideBar />
-        <ClothingSection />
+        <ClothingSection onCardClick={onCardClick} />
       </div>
     </div>
   );
