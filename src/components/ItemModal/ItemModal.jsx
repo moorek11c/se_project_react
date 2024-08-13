@@ -1,13 +1,11 @@
 import closeBtn from "../../assets/images/CloseBtn.png";
 import "./ItemModal.css";
 
-function ItemModal({ activModal, closeModalClick, card }) {
-  console.log(`ItemModal activModal: ${activModal}`); // Debugging output
-
+function ItemModal({ activeModal, onClose, card }) {
   return (
-    <div className={`modal ${activModal === "preview" && "modal_opened"}`}>
+    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__container modal__container_preview">
-        <button onClick={closeModalClick} className="modal__close">
+        <button onClick={onClose} className="modal__close">
           <img src={closeBtn} alt="close button" />
         </button>
 

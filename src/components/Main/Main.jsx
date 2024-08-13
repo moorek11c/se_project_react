@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "./Main.css";
 import WeatherCard from "./WeatherCard/WeatherCard.jsx";
 import ItemCard from "../Main/ItemCard/ItemCard.jsx";
@@ -10,21 +10,20 @@ function Main({ weatherData, handleCardClick }) {
   const { currentTemperatureUnit } = React.useContext(
     CurrentTemperatureUnitContext
   );
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  // gets the current temperature based on the current temperature unit
-
-  const temperature =
-    currentTemperatureUnit === "F" ? weatherData.temp.F : weatherData.temp.C;
-
-  const result = weatherData;
+  const result = { ...weatherData };
   result.type = {
     F: getWeatherType(result.temp.F, "F"),
     C: getWeatherType(result.temp.C, "C"),
   };
 
+  const temperature =
+    currentTemperatureUnit === "F" ? result.temp.F : result.temp.C;
+
   return (
     <main>
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard weatherData={result} />
       <section className="cards">
         <p className="cards__text">
           Today is {temperature}°{currentTemperatureUnit} / You may want to
@@ -41,6 +40,7 @@ function Main({ weatherData, handleCardClick }) {
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  selectedItem={selectedItem}
                 />
               );
             })}

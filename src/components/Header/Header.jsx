@@ -4,7 +4,7 @@ import avatar from "../../assets/images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 
-function Header({ weatherData }) {
+function Header({ weatherData, onAddClothesClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -16,7 +16,11 @@ function Header({ weatherData }) {
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      <button type="button" className="header__add-clothes-btn">
+      <button
+        onClick={onAddClothesClick}
+        type="button"
+        className="header__add-clothes-btn"
+      >
         + Add clothes
       </button>
       <div className="header__user-container">
