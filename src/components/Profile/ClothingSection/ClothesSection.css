@@ -1,4 +1,4 @@
-/* .clothes-section__wrapper {
+.clothes-section__wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -36,4 +36,4 @@
   font-size: 20px;
   white-space: nowrap;
   cursor: pointer;
-} */
+}

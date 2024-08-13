@@ -11,7 +11,9 @@ function Header({ weatherData, onAddClothesClick }) {
   });
   return (
     <header className="header">
-      <img className="header__logo" src={logo} alt="logo" />
+      <Link to="/">
+        <img className="header__logo" src={logo} alt="logo" />
+      </Link>
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>

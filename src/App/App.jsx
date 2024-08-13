@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getWeatherData, filterWeatherData } from "../utils/weatherApi.js";
+import { Routes, Route } from "react-router-dom";
 import { APIkey, coordinates } from "../utils/constants.js";
 import "./App.css";
 import Header from "../components/Header/Header.jsx";
@@ -7,6 +8,7 @@ import Main from "../components/Main/Main.jsx";
 import Footer from "../components/Footer/Footer";
 import ItemModal from "../components/ItemModal/ItemModal.jsx";
 import ModalWithForm from "../components/ModalWithForm/ModalWithForm.jsx";
+import Profile from "../components/Profile/Profile.jsx";
 
 // Data
 
@@ -66,7 +68,18 @@ function App() {
             weatherData={weatherData}
             onAddClothesClick={onAddClothesClick}
           />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            ></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+          </Routes>
           <Footer />
         </div>
         <ModalWithForm
