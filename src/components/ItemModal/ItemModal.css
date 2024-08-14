@@ -8,6 +8,7 @@
   width: 498px;
   height: 498px;
   border-radius: 16px 16px 0 0;
+  object-fit: cover;
 }
 
 .modal__footer {
@@ -31,4 +32,17 @@
   padding-top: 12px;
   padding-bottom: 32px;
   padding-left: 32px;
+}
+
+.modal__delete-btn {
+  position: absolute;
+  white-space: nowrap;
+  width: 101px;
+  height: 24px;
+  color: red;
+  top: 518px;
+  right: 32px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
 }

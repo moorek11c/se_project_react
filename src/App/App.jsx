@@ -11,6 +11,7 @@ import Footer from "../components/Footer/Footer";
 import ItemModal from "../components/ItemModal/ItemModal.jsx";
 import AddItemModal from "../components/AddItemModal/AddItemModal.jsx";
 import Profile from "../components/Profile/Profile.jsx";
+import { getItems, addItem, deleteItem } from "../utils/api";
 
 /****************************
  * sets the weather data *
@@ -27,6 +28,7 @@ function App() {
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [clothingItems, setClothingItems] = useState([]);
 
   const onAddClothesClick = () => {
     setActiveModal("add-garment");
@@ -41,6 +43,24 @@ function App() {
     setActiveModal("");
   };
 
+  const handleAddItemSubmit = (item) => {
+    addItem(item)
+      .then((newItem) => {
+        setClothingItems([...clothingItems, newItem]);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleDeleteItem = (itemId) => {
+    deleteItem(itemId)
+      .then(() => {
+        setClothingItems(clothingItems.filter((item) => item._id !== itemId));
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
   useEffect(() => {
     getWeatherData(coordinates, APIkey)
       .then((data) => {
@@ -50,6 +70,15 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
+      })
+      .catch(console.error);
   }, []);
 
   return (
@@ -67,12 +96,19 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                  handleAddItemSubmit={handleAddItemSubmit}
                 />
               }
             ></Route>
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  clothingItems={clothingItems}
+                  onCardClick={handleCardClick}
+                />
+              }
             ></Route>
           </Routes>
           <Footer />
@@ -82,10 +118,12 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          onDelete={handleDeleteItem}
         />
         <AddItemModal
           activeModal={activeModal === "add-garment"}
           onClose={closeActiveModal}
+          onAddItem={handleAddItemSubmit}
         />
       </div>
     </CurrentTemperatureUnitProvider>
