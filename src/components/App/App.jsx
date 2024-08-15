@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { getWeatherData, filterWeatherData } from "../utils/weatherApi.js";
+import { getWeatherData, filterWeatherData } from "../../utils/weatherApi.js";
 import { Routes, Route } from "react-router-dom";
-import { APIkey, coordinates } from "../utils/constants.js";
-import { CurrentTemperatureUnitProvider } from "../components/Contexts/CurrentTemperatureUnitContext";
+import { APIkey, coordinates } from "../../utils/constants.js";
+import { CurrentTemperatureUnitProvider } from "../Contexts/CurrentTemperatureUnitContext.jsx";
 
 import "./App.css";
-import Header from "../components/Header/Header.jsx";
-import Main from "../components/Main/Main.jsx";
-import Footer from "../components/Footer/Footer";
-import ItemModal from "../components/ItemModal/ItemModal.jsx";
-import AddItemModal from "../components/AddItemModal/AddItemModal.jsx";
-import Profile from "../components/Profile/Profile.jsx";
-import { getItems, addItem, deleteItem } from "../utils/api";
+import Header from "../Header/Header.jsx";
+import Main from "../Main/Main.jsx";
+import Footer from "../Footer/Footer.jsx";
+import ItemModal from "../ItemModal/ItemModal.jsx";
+import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import Profile from "../Profile/Profile.jsx";
+import { getItems, addItem, deleteItem } from "../../utils/api.js";
 
 /****************************
  * sets the weather data *
