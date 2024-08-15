@@ -1,13 +1,8 @@
 const baseUrl = "http://localhost:3001";
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-};
+import { handleResponse } from "./constants";
 
 function getItems() {
-  return fetch(`${baseUrl}/items`).then(checkResponse);
+  return fetch(`${baseUrl}/items`).then(handleResponse);
 }
 
 function addItem(item) {
@@ -17,13 +12,13 @@ function addItem(item) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(item),
-  }).then(checkResponse);
+  }).then(handleResponse);
 }
 
 function deleteItem(itemId) {
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
-  }).then(checkResponse);
+  }).then(handleResponse);
 }
 
 export { getItems, addItem, deleteItem };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getWeatherData, filterWeatherData } from "../../utils/weatherApi.js";
 import { Routes, Route } from "react-router-dom";
 import { APIkey, coordinates } from "../../utils/constants.js";
-import { CurrentTemperatureUnitProvider } from "../Contexts/CurrentTemperatureUnitContext.jsx";
+import { CurrentTemperatureUnitProvider } from "../../Contexts/CurrentTemperatureUnitContext.jsx";
 
 import "./App.css";
 import Header from "../Header/Header.jsx";
@@ -34,10 +34,6 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const onAddItemClick = () => {
-    setActiveModal("add-garment");
-  };
-
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -48,12 +44,14 @@ function App() {
   };
 
   const handleAddItemSubmit = (item) => {
-    addItem(item)
+    return addItem(item)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Error adding item:", err);
+      });
   };
 
   const handleDeleteItem = (itemId) => {
@@ -64,6 +62,22 @@ function App() {
       })
       .catch(console.error);
   };
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   useEffect(() => {
     getWeatherData(coordinates, APIkey)
@@ -110,7 +124,7 @@ function App() {
                 <Profile
                   clothingItems={clothingItems}
                   onCardClick={handleCardClick}
-                  onAddItemClick={onAddItemClick}
+                  onAddClothesClick={onAddClothesClick}
                 />
               }
             ></Route>

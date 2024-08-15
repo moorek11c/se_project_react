@@ -1,4 +1,5 @@
 import closeBtn from "../../assets/images/CloseBtn.png";
+
 import "./ItemModal.css";
 
 function ItemModal({ activeModal, onClose, card, onDelete }) {

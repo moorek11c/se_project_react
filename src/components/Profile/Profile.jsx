@@ -6,7 +6,7 @@ import ClothesSection from "./ClothesSection.jsx";
 export default function Profile({
   onCardClick,
   clothingItems,
-  onAddItemClick,
+  onAddClothesClick,
 }) {
   return (
     <div className="profile">
@@ -16,7 +16,7 @@ export default function Profile({
         <ClothesSection
           onCardClick={onCardClick}
           clothingItems={clothingItems}
-          onAddItemClick={onAddItemClick}
+          onAddClothesClick={onAddClothesClick}
         />
       </div>
     </div>

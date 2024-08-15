@@ -4,7 +4,7 @@ import ItemCard from "../Main/ItemCard/ItemCard";
 export default function ClothesSection({
   onCardClick,
   clothingItems,
-  onAddItemClick,
+  onAddClothesClick,
 }) {
   return (
     <div className="clothes__section">
@@ -12,7 +12,7 @@ export default function ClothesSection({
         <div className="clothes-section__info">
           <h1 className="clothes-section__title">Your items</h1>
           <button
-            onClick={onAddItemClick}
+            onClick={onAddClothesClick}
             className="clothes-section__add-btn"
             type="button"
           >

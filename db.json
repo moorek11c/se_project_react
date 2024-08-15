@@ -119,6 +119,54 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
       "weather": "warm",
       "_id": 20
+    },
+    {
+      "name": "Jacques Cousteau",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "cold",
+      "_id": 21
+    },
+    {
+      "name": "Jacques Cousteau",
+      "imageUrl": "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "weather": "warm",
+      "_id": 22
+    },
+    {
+      "name": "RYAN MOORE",
+      "imageUrl": "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "weather": "warm",
+      "_id": 23
+    },
+    {
+      "name": "RYAN MOORE",
+      "imageUrl": "https://images.unsplash.com/photo-1721332154373-17e78d19b4a4?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "weather": "warm",
+      "_id": 24
+    },
+    {
+      "name": "Jacques Cousteau",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "cold",
+      "_id": 25
+    },
+    {
+      "name": "Jacques Cousteau",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8",
+      "weather": "warm",
+      "_id": 26
+    },
+    {
+      "name": "RYAN MOOREdfrghertherth",
+      "imageUrl": "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "weather": "cold",
+      "_id": 27
+    },
+    {
+      "name": "Jacques Cousteau",
+      "imageUrl": "https://images.unsplash.com/photo-1609709295948-17d77cb2a69b?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "weather": "warm",
+      "_id": 28
     }
   ]
 }
