@@ -47,6 +47,7 @@
 .modal__label {
   margin-left: 28px;
   margin-top: 24px;
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -67,7 +68,6 @@
 }
 
 .modal__legend {
-  padding-top: 24px;
   font-size: 16px;
   margin-bottom: 12px;
   line-height: 20px;
@@ -80,6 +80,7 @@
   display: flex;
   flex-direction: column;
   margin-left: 28px;
+  margin-top: 24px;
 }
 
 .modal__label_type_radio {
@@ -103,7 +104,7 @@
   font-size: 16px;
   line-height: 20px;
   color: #fff;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgb(0, 0, 0);
   border: none;
 
   position: absolute;
@@ -112,4 +113,22 @@
   width: 124px;
   height: 36px;
   border-radius: 4px;
+}
+
+.modal__error {
+  position: absolute;
+  top: 50px;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  visibility: hidden;
+  height: 16px;
+}
+
+.modal__input:invalid + .modal__error {
+  visibility: visible;
+}
+
+.modal__submit-btn:disabled {
+  opacity: 0.6;
 }

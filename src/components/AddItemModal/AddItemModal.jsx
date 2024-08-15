@@ -1,30 +1,72 @@
-import React from "react";
-
+import { useState, useEffect } from "react";
 import "./AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
-  const [name, setName] = React.useState("");
+  const [name, setName] = useState("");
+  const [imageUrl, setUrl] = useState("");
+  const [weather, setWeather] = useState("");
+  const [errors, setErrors] = useState({ name: "", imageUrl: "", weather: "" });
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      name: e.target.value ? "" : "Name is required.",
+    }));
   };
 
-  const [imageUrl, setUrl] = React.useState("");
   const handleUrlChange = (e) => {
-    console.log(e.target.value);
     setUrl(e.target.value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      imageUrl: e.target.value ? "" : "Image URL is required.",
+    }));
   };
 
-  const [weather, setWeather] = React.useState("");
   const handleWeatherChange = (e) => {
-    console.log(e.target.value);
     setWeather(e.target.value);
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      weather: e.target.value ? "" : "Please select a weather type.",
+    }));
   };
+
+  useEffect(() => {
+    const isFormValid = name && imageUrl && weather;
+    setIsSubmitDisabled(!isFormValid);
+  }, [name, imageUrl, weather]);
+
+  useEffect(() => {
+    if (!activeModal) {
+      setName("");
+      setUrl("");
+      setWeather("");
+      setErrors({ name: "", imageUrl: "", weather: "" });
+      setIsSubmitDisabled(true);
+    }
+  }, [activeModal]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+
+    const formErrors = {
+      name: name ? "" : "Name is required.",
+      imageUrl: imageUrl ? "" : "Image URL is required.",
+      weather: weather ? "" : "Please select a weather type.",
+    };
+
+    if (Object.values(formErrors).some((error) => error)) {
+      setErrors(formErrors);
+    } else {
+      onAddItem({ name, imageUrl, weather });
+      setName("");
+      setUrl("");
+      setWeather("");
+      setErrors({ name: "", imageUrl: "", weather: "" });
+      onClose();
+    }
   };
 
   return (
@@ -36,6 +78,7 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
         onAddClothesClick={onAddClothesClick}
         handleCloseClick={onClose}
         onSubmit={handleSubmit}
+        isSubmitDisabled={isSubmitDisabled}
       >
         <label htmlFor="name" className="modal__label">
           Name{" "}
@@ -48,6 +91,7 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
             onChange={handleNameChange}
             required
           />
+          {errors.name && <span className="modal__error">{errors.name}</span>}
         </label>
         <label htmlFor="imageUrl" className="modal__label">
           Image{" "}
@@ -59,7 +103,11 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
             id="imageUrl"
             onChange={handleUrlChange}
             placeholder="Image URL"
+            required
           />
+          {errors.imageUrl && (
+            <span className="modal__error">{errors.imageUrl}</span>
+          )}
         </label>
         <fieldset className="modal__radio-btns">
           <legend className="modal__legend">Select the weather type:</legend>
@@ -71,6 +119,7 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
               className="modal__radio-input"
               name="weather"
               onChange={handleWeatherChange}
+              checked={weather === "hot"}
             />{" "}
             Hot
           </label>
@@ -85,6 +134,7 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
               className="modal__radio-input"
               name="weather"
               onChange={handleWeatherChange}
+              checked={weather === "warm"}
             />{" "}
             Warm
           </label>
@@ -99,9 +149,13 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
               className="modal__radio-input"
               name="weather"
               onChange={handleWeatherChange}
+              checked={weather === "cold"}
             />{" "}
             Cold
           </label>
+          {errors.weather && (
+            <span className="modal__error">{errors.weather}</span>
+          )}
         </fieldset>
       </ModalWithForm>
     </div>
