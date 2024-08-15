@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Profile.css";
 import SideBar from "./SideBar.jsx";
-import ClothingSection from "./ClothesSection.jsx";
+import ClothesSection from "./ClothesSection.jsx";
 
 export default function Profile({ onCardClick, clothingItems }) {
   return (
@@ -9,7 +9,7 @@ export default function Profile({ onCardClick, clothingItems }) {
       <div className="profile__wrapper">
         <Link to="/Profile"></Link>
         <SideBar />
-        <ClothingSection
+        <ClothesSection
           onCardClick={onCardClick}
           clothingItems={clothingItems}
         />
