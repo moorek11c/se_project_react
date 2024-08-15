@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Profile.css";
-import SideBar from "./SideBar/SideBar.jsx";
-import ClothingSection from "./ClothingSection/ClothesSection.jsx";
+import SideBar from "./SideBar.jsx";
+import ClothingSection from "./ClothesSection.jsx";
 
 export default function Profile({ onCardClick, clothingItems }) {
   return (

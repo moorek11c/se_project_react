@@ -2,18 +2,19 @@ import "./Header.css";
 import logo from "../../assets/images/wtwr°.svg";
 import avatar from "../../assets/images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Header({ weatherData, onAddClothesClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
   return (
     <header className="header">
-      <Link to="/">
+      <NavLink to="/">
         <img className="header__logo" src={logo} alt="logo" />
-      </Link>
+      </NavLink>
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
@@ -27,14 +28,14 @@ function Header({ weatherData, onAddClothesClick }) {
       </button>
       <div className="header__user-container">
         <nav className="header__nav">
-          <Link className="header__username" to="/Profile">
-            {" "}
-            Ryan Moore{" "}
-          </Link>
+          <NavLink className="header__username" to="/Profile">
+            Ryan Moore
+          </NavLink>
         </nav>
         <img className="header__avatar" src={avatar} alt="avatar" />
       </div>
     </header>
   );
 }
+
 export default Header;

@@ -1,6 +1,6 @@
 import "./ClothesSection.css";
 // import { clothingItems } from "../../../utils/constants.js";
-import ItemCard from "../../Main/ItemCard/ItemCard.jsx";
+import ItemCard from "../Main/ItemCard/ItemCard";
 
 export default function ClothesSection({ onCardClick, clothingItems }) {
   return (
