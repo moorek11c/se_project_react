@@ -2,6 +2,12 @@
   width: 323px;
   position: relative;
   display: flex;
+  transition: transform 0.3s ease; /* Smooth transition */
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.1);
 }
 
 .card__title {

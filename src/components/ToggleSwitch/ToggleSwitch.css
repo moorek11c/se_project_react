@@ -21,6 +21,7 @@
   cursor: pointer;
   position: absolute;
   cursor: pointer;
+  transition: left 0.3s ease;
 }
 
 .switch__slider-F {
