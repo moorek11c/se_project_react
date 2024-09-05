@@ -10,6 +10,7 @@ function addItem(item) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify(item),
   }).then(handleResponse);
@@ -18,6 +19,10 @@ function addItem(item) {
 function deleteItem(itemId) {
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
   }).then(handleResponse);
 }
 

@@ -5,7 +5,7 @@ import ItemCard from "../Main/ItemCard/ItemCard.jsx";
 import CurrentTemperatureUnitContext from "../../Contexts/CurrentTemperatureUnitContext.jsx";
 import { getWeatherType } from "../../utils/weatherApi.js";
 
-function Main({ weatherData, handleCardClick, clothingItems }) {
+function Main({ weatherData, handleCardClick, clothingItems, isLoggedIn }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const result = { ...weatherData };
@@ -17,6 +17,8 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
   const temperature =
     currentTemperatureUnit === "F" ? result.temp.F : result.temp.C;
 
+  const filteredClothingItems = isLoggedIn ? clothingItems : [];
+
   return (
     <main>
       <WeatherCard weatherData={result} />
@@ -26,7 +28,7 @@ function Main({ weatherData, handleCardClick, clothingItems }) {
           wear:
         </p>
         <ul className="cards__list">
-          {clothingItems
+          {filteredClothingItems
             .filter((item) => {
               return item.weather === result.type[currentTemperatureUnit];
             })

@@ -7,12 +7,14 @@ export default function Profile({
   onCardClick,
   clothingItems,
   onAddClothesClick,
+  onEditProfileClick,
+  onLogout,
 }) {
   return (
     <div className="profile">
       <div className="profile__wrapper">
         <Link to="/Profile"></Link>
-        <SideBar />
+        <SideBar onLogout={onLogout} onEditProfileClick={onEditProfileClick} />
         <ClothesSection
           onCardClick={onCardClick}
           clothingItems={clothingItems}

@@ -71,4 +71,52 @@
 .header__avatar {
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+}
+
+/* sign-in/sign-up Links */
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  white-space: nowrap;
+}
+
+.sign-in__link {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  color: #000;
+  text-decoration: none;
+  border: none;
+  margin-right: 20px;
+}
+
+.sign-in__link:hover {
+  text-decoration: underline;
+}
+
+.sign-up__link {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 0;
+  margin: 0;
+  color: #000;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+}
+
+.sign-up__link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.sign-up__link:active {
+  text-decoration: underline;
 }

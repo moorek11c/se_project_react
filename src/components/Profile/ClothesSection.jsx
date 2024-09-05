@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import CurrentUserContext from "../../Contexts/CurrentUserContext";
+
 import "./ClothesSection.css";
 import ItemCard from "../Main/ItemCard/ItemCard";
 
@@ -6,6 +9,12 @@ export default function ClothesSection({
   clothingItems,
   onAddClothesClick,
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
+
+  const userClothingItems = clothingItems.filter(
+    (item) => item.owner === currentUser._id
+  );
+
   return (
     <div className="clothes__section">
       <div className="clothes-section__wrapper">
@@ -20,11 +29,13 @@ export default function ClothesSection({
           </button>
         </div>
         <ul className="clothes-section__list">
-          {clothingItems.map((item) => {
-            return (
+          {userClothingItems.length > 0 ? (
+            userClothingItems.map((item) => (
               <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-            );
-          })}
+            ))
+          ) : (
+            <p className="clothes-section__no-items">No items found</p>
+          )}
         </ul>
       </div>
     </div>
