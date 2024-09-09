@@ -1,6 +1,6 @@
 import "./EditProfileModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import { editProfileModalSchema } from "../FormSchemas/ModalSchemas";
+import { editProfileModalSchema } from "../../../utils/FormSchemas/ModalSchemas";
 import { useFormik } from "formik";
 import { editProfile } from "../../../utils/auth";
 import { useContext } from "react";

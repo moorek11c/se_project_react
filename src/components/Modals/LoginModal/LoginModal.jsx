@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 
 import "./LoginModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import { loginModalSchema } from "../FormSchemas/ModalSchemas";
+import { loginModalSchema } from "../../../utils/FormSchemas/ModalSchemas";
 import { login } from "../../../utils/auth";
 
 function LoginModal({ activeModal, onClose, onSubmit, openSignup }) {

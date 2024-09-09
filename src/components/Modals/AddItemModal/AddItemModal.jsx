@@ -1,6 +1,6 @@
 import "./AddItemModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import { addItemModalSchema } from "../FormSchemas/ModalSchemas";
+import { addItemModalSchema } from "../../../utils/FormSchemas/ModalSchemas";
 import { addItem } from "../../../utils/api";
 import { useFormik } from "formik";
 

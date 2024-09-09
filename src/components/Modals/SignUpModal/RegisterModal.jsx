@@ -1,6 +1,6 @@
 import "./RegisterModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import { SignUpModalSchema } from "../FormSchemas/ModalSchemas";
+import { SignUpModalSchema } from "../../../utils/FormSchemas/ModalSchemas";
 import { useFormik } from "formik";
 import { register } from "../../../utils/auth";
 
