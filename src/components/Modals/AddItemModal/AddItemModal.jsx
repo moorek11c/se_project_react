@@ -1,70 +1,44 @@
-import { useState, useEffect } from "react";
 import "./AddItemModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
+import { addItemModalSchema } from "../FormSchemas/ModalSchemas";
+import { addItem } from "../../../utils/api";
+import { useFormik } from "formik";
 
-function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
-  const [name, setName] = useState("");
-  const [imageUrl, setUrl] = useState("");
-  const [weather, setWeather] = useState("");
-  const [errors, setErrors] = useState({ name: "", imageUrl: "", weather: "" });
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+function AddItemModal({ activeModal, onClose, onAddClothesClick, onSubmit }) {
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      imageUrl: "",
+      weather: "",
+    },
+    validationSchema: addItemModalSchema,
+    validateOnChange: true,
+    validateOnBlur: true,
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      name: e.target.value ? "" : "Name is required.",
-    }));
-  };
+    onSubmit: async (values, { setErrors, resetForm }) => {
+      try {
+        const response = await addItem(values);
 
-  const handleUrlChange = (e) => {
-    setUrl(e.target.value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      imageUrl: e.target.value ? "" : "Image URL is required.",
-    }));
-  };
-
-  const handleWeatherChange = (e) => {
-    setWeather(e.target.value);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      weather: e.target.value ? "" : "Please select a weather type.",
-    }));
-  };
-
-  useEffect(() => {
-    const isFormValid = name && imageUrl && weather;
-    setIsSubmitDisabled(!isFormValid);
-  }, [name, imageUrl, weather]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const formErrors = {
-      name: name ? "" : "Name is required.",
-      imageUrl: imageUrl ? "" : "Image URL is required.",
-      weather: weather ? "" : "Please select a weather type.",
-    };
-
-    if (Object.values(formErrors).some((error) => error)) {
-      setErrors(formErrors);
-    } else {
-      onAddItem({ name, imageUrl, weather })
-        .then(() => {
-          setName("");
-          setUrl("");
-          setWeather("");
-          setErrors({ name: "", imageUrl: "", weather: "" });
-          setIsSubmitDisabled(true);
-
+        if (response.message) {
+          setErrors({
+            name: response.message.includes("Name") ? response.message : "",
+            imageUrl: response.message.includes("Image")
+              ? response.message
+              : "",
+            weather: response.message.includes("Weather")
+              ? response.message
+              : "",
+          });
+        } else {
+          onSubmit(values);
+          resetForm();
           onClose();
-        })
-        .catch((err) => {
-          console.error("Error adding item:", err);
-        });
-    }
-  };
+        }
+      } catch (error) {
+        console.error("An unexpected error occurred:", error);
+      }
+    },
+  });
 
   return (
     <ModalWithForm
@@ -73,78 +47,91 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onAddItem }) {
       activeModal={activeModal}
       onAddClothesClick={onAddClothesClick}
       handleCloseClick={onClose}
-      onSubmit={handleSubmit}
-      isSubmitDisabled={isSubmitDisabled}
+      onSubmit={(e) => {
+        console.log("Form Submit Triggered"); // Log to check when this is called
+        e.preventDefault(); // Prevent default form submission
+        formik.handleSubmit(e); //Formik's handleSubmit
+      }}
+      isSubmitDisabled={!(formik.isValid && formik.dirty)} // Disable when form is not valid or not dirty
+      modalType="add-item-modal"
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="name" className="modal__label modal__label-type-input">
         Name{" "}
         <input
           type="text"
           className="modal__input"
           id="name"
           placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           required
         />
-        {errors.name && <span className="modal__error">{errors.name}</span>}
+        {formik.errors.name && formik.touched.name && (
+          <span className="modal__error">{formik.errors.name}</span>
+        )}{" "}
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label
+        htmlFor="imageUrl"
+        className="modal__label modal__label-type-input"
+      >
         Image{" "}
         <input
           type="url"
-          className="modal__input"
+          className={`modal__input ${
+            formik.errors.email && formik.touched.email ? "modal__error" : ""
+          }`}
           name="imageUrl"
-          value={imageUrl}
           id="imageUrl"
-          onChange={handleUrlChange}
           placeholder="Image URL"
+          value={formik.values.imageUrl}
+          onChange={formik.handleChange}
           required
         />
-        {errors.imageUrl && (
-          <span className="modal__error">{errors.imageUrl}</span>
+        {formik.errors.imageUrl && formik.touched.imageUrl && (
+          <span className="modal__error">{formik.errors.imageUrl}</span>
         )}
       </label>
       <fieldset className="modal__radio-btns">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+        <label htmlFor="hot" className="modal__label_type_radio">
           <input
             type="radio"
             id="hot"
             value="hot"
-            className="modal__radio-input"
             name="weather"
-            onChange={handleWeatherChange}
-            checked={weather === "hot"}
+            className="modal__radio-input"
+            onChange={formik.handleChange}
+            checked={formik.values.weather === "hot"}
           />{" "}
           Hot
         </label>
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+        <label htmlFor="warm" className="modal__label_type_radio">
           <input
             type="radio"
             id="warm"
             value="warm"
             className="modal__radio-input"
             name="weather"
-            onChange={handleWeatherChange}
-            checked={weather === "warm"}
+            onChange={formik.handleChange}
+            checked={formik.values.weather === "warm"}
           />{" "}
           Warm
         </label>
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
+        <label htmlFor="cold" className="modal__label_type_radio">
           <input
             type="radio"
             id="cold"
             value="cold"
             className="modal__radio-input"
             name="weather"
-            onChange={handleWeatherChange}
-            checked={weather === "cold"}
+            onChange={formik.handleChange}
+            checked={formik.values.weather === "cold"}
           />{" "}
           Cold
         </label>
-        {errors.weather && (
-          <span className="modal__error">{errors.weather}</span>
+        {formik.errors.weather && formik.touched.weather && (
+          <span className="modal__error">{formik.errors.weather}</span>
         )}
       </fieldset>
     </ModalWithForm>

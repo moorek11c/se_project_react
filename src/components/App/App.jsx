@@ -16,15 +16,19 @@ import Footer from "../Footer/Footer.jsx";
 import ItemModal from "../Modals/ItemModal/ItemModal.jsx";
 import AddItemModal from "../Modals/AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
-import { getItems, addItem, deleteItem } from "../../utils/api.js";
+import {
+  getItems,
+  addItem,
+  deleteItem,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api.js";
 import ProtectedRoutes from "../ProtectedRoutes/ProtectedRoutes.jsx";
 import SignUpModal from "../Modals/SignUpModal/RegisterModal.jsx";
 import LoginModal from "../Modals/LoginModal/LoginModal.jsx";
 import * as auth from "../../utils/auth.js";
 import EditProfileModal from "../Modals/EditProfileModal/EditProfileModal.jsx";
-
 function App() {
-  // State for the weather data
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -60,23 +64,6 @@ function App() {
     }));
   };
 
-  // registration handler
-  // check if name, avatar, email and password are provided
-  // if not, log an error
-  // try to register the user with the name, avatar, email and password
-  // if the registration is successful, set the currentUser and isLoggedIn to true
-  // close the active modal
-
-  const handleRegistraiton = ({ name, avatar, email, password }) => {
-    auth
-      .register({ name, avatar, email, password })
-      .then(() => {
-        setIsLoggedIn(true);
-        closeActiveModal();
-      })
-      .catch(console.error);
-  };
-
   // validate token on page load
   // checkToken is called from the auth.js file
   // checkToken successfully returns the data in then()
@@ -88,7 +75,6 @@ function App() {
       try {
         const data = await auth.checkToken();
         setCurrentUser(data);
-        // setUserData(data);
         setIsLoggedIn(true);
       } catch (err) {
         console.error(err);
@@ -126,26 +112,18 @@ function App() {
           setCurrentUser(user);
         } else {
           setCurrentUser(null);
-          console.warn("User data is incomplete or missing");
         }
 
         setIsLoggedIn(true);
         closeActiveModal();
         navigate("/profile");
       } else {
-        console.error("No token returned from server");
-        // Optionally, display an error message to the user
+        throw new Error("Invalid token");
       }
     } catch (error) {
       console.error("Login error:", error);
-      // Optionally, display an error message to the user
     }
   };
-
-  // Edit profile
-  // first check if name and avatar are provided
-  // if not, log an error
-  // try to update the user with the name and avatar
 
   // handle Logging Out
   // remove the token from localStorage
@@ -192,6 +170,15 @@ function App() {
   // Close the active modal
   const closeActiveModal = () => {
     setActiveModal("");
+  };
+
+  // handleRegistrationSuccess
+
+  const handleRegistrationSuccess = (values) => {
+    setCurrentUser(values);
+    setIsLoggedIn(true);
+
+    closeActiveModal();
   };
 
   // Add a new item to the profile page and the database
@@ -267,9 +254,27 @@ function App() {
       .catch(console.error);
   }, []);
 
+  const handleCardLike = ({ _id, isLiked }) => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return;
+    }
+
+    const action = isLiked ? removeCardLike : addCardLike;
+
+    action(_id, token)
+      .then((updatedCard) => {
+        setClothingItems((cards) =>
+          cards.map((item) => (item._id === _id ? updatedCard : item))
+        );
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
-    <CurrentTemperatureUnitProvider>
-      <CurrentUserContext.Provider value={{ currentUser }}>
+    <CurrentUserContext.Provider value={{ currentUser }}>
+      <CurrentTemperatureUnitProvider>
         <div className="page">
           <div className="page__wrapper">
             <Header
@@ -284,10 +289,12 @@ function App() {
                 path="/"
                 element={
                   <Main
+                    isLoggedIn={isLoggedIn}
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     handleAddItemSubmit={handleAddItemSubmit}
+                    onCardLike={handleCardLike}
                   />
                 }
               ></Route>
@@ -301,6 +308,8 @@ function App() {
                       onAddClothesClick={onAddClothesClick}
                       onEditProfileClick={onEditProfileClick}
                       onLogout={handleLogout}
+                      isLoggedIn={isLoggedIn}
+                      handleCardLike={handleCardLike}
                     />
                   </ProtectedRoutes>
                 }
@@ -328,27 +337,29 @@ function App() {
           <AddItemModal
             activeModal={activeModal === "add-garment"}
             onClose={closeActiveModal}
-            onAddItem={handleAddItemSubmit}
+            onSubmit={handleAddItemSubmit}
           />
           <SignUpModal
             activeModal={activeModal === "sign-up"}
             onClose={closeActiveModal}
-            onSubmit={handleRegistraiton}
+            onSubmit={handleRegistrationSuccess}
+            openLogin={onLoginClick}
           />
           <LoginModal
             activeModal={activeModal === "login"}
             onClose={closeActiveModal}
-            handleLogin={handleLogin}
+            onSubmit={handleLogin}
+            openSignup={onSignUpClick}
           />
           <EditProfileModal
             activeModal={activeModal === "edit-profile"}
             onClose={closeActiveModal}
             currentUser={currentUser}
-            onProfileChange={handleProfileChange}
+            onSubmit={handleProfileChange}
           />
         </div>
-      </CurrentUserContext.Provider>
-    </CurrentTemperatureUnitProvider>
+      </CurrentTemperatureUnitProvider>
+    </CurrentUserContext.Provider>
   );
 }
 

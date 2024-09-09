@@ -5,7 +5,13 @@ import ItemCard from "../Main/ItemCard/ItemCard.jsx";
 import CurrentTemperatureUnitContext from "../../Contexts/CurrentTemperatureUnitContext.jsx";
 import { getWeatherType } from "../../utils/weatherApi.js";
 
-function Main({ weatherData, handleCardClick, clothingItems, isLoggedIn }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  clothingItems,
+  isLoggedIn,
+  onCardLike,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const result = { ...weatherData };
@@ -33,11 +39,15 @@ function Main({ weatherData, handleCardClick, clothingItems, isLoggedIn }) {
               return item.weather === result.type[currentTemperatureUnit];
             })
             .map((item) => {
+              console.log(item);
+
               return (
                 <ItemCard
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  onCardLike={onCardLike}
+                  isLoggedIn={isLoggedIn}
                 />
               );
             })}

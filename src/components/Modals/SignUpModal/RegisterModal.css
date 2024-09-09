@@ -1,0 +1,34 @@
+.modal__title {
+  line-height: 20px;
+}
+
+.modal__label {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  height: 52px;
+}
+
+.modal__label:last-of-type {
+  margin-bottom: 0;
+}
+
+.modal__submit-btn {
+  width: 86px;
+  height: 36px;
+  bottom: 23px;
+  cursor: pointer;
+}
+
+.modal__button_login {
+  border: none;
+  background-color: transparent;
+  white-space: nowrap;
+  position: absolute;
+  height: 20px;
+  width: 73px;
+  bottom: 31px;
+  left: 123px;
+  font-weight: 700;
+  opacity: 0.5;
+  cursor: pointer;
+}

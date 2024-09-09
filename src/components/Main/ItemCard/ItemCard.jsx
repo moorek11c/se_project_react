@@ -1,14 +1,39 @@
-import "./ItemCard.css";
+import { useContext } from "react";
 
-function ItemCard({ item, onCardClick }) {
+import "./ItemCard.css";
+import cardLikeBtn from "../../../assets/images/Like button.svg";
+import unLike from "../../../assets/images/unLikeBtn.svg";
+import CurrentUserContext from "../../../Contexts/CurrentUserContext.jsx";
+
+function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
+  const { currentUser } = useContext(CurrentUserContext);
+
   const handleCardClick = () => {
     onCardClick(item);
   };
 
+  const handleLike = () => {
+    onCardLike({ _id: item._id, isLiked: isLiked });
+  };
+
+  const isLiked = item.likes.some((id) => id === currentUser._id);
+  const itemLikeButton = `card__like-btn ${
+    isLiked ? "card__like-btn_active" : ""
+  }`;
+
   return (
     <li className="card">
-      <h2 className="card__title">{item.name}</h2>
-
+      <div className="card__description">
+        <h2 className="card__title">{item.name}</h2>
+        {isLoggedIn && (
+          <img
+            onClick={handleLike}
+            className={itemLikeButton}
+            src={isLiked ? cardLikeBtn : unLike}
+            alt="like button"
+          />
+        )}
+      </div>
       <img
         onClick={handleCardClick}
         className="card__image"

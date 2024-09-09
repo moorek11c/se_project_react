@@ -1,89 +1,81 @@
-import { useState } from "react";
 import "./EditProfileModal.css";
 import ModalWithForm from "../../ModalWithForm/ModalWithForm";
-import { BASE_URL } from "../../../utils/constants";
+import { editProfileModalSchema } from "../FormSchemas/ModalSchemas";
+import { useFormik } from "formik";
+import { editProfile } from "../../../utils/auth";
+import { useContext } from "react";
+import currentUserContext from "../../../Contexts/CurrentUserContext";
 
-function EditProfileModal({ activeModal, onClose, onProfileChange }) {
-  const [updateProfile, setUpdateProfile] = useState({
-    name: "",
-    avatar: "",
-  });
+function EditProfileModal({ activeModal, onClose, onSubmit }) {
+  const { _id } = useContext(currentUserContext);
+  const formik = useFormik({
+    initialValues: {
+      id: _id,
+      name: "",
+      avatar: "",
+    },
+    validationSchema: editProfileModalSchema,
+    validateOnChange: true,
+    validateOnBlur: true,
 
-  const { name, avatar } = updateProfile;
+    onSubmit: async (values, { setErrors, resetForm }) => {
+      try {
+        const response = await editProfile(values);
 
-  const handleNameChange = (e) => {
-    const { value } = e.target;
-    setUpdateProfile({ ...updateProfile, name: value });
-  };
-
-  const handleAvatarChange = (e) => {
-    const { value } = e.target;
-    setUpdateProfile({ ...updateProfile, avatar: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.log("Token is not provided");
-      return;
-    }
-
-    try {
-      const response = await fetch(`${BASE_URL}/users/me`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(updateProfile),
-      });
-
-      // If the request is successful, update the user in the App component
-
-      if (response.ok) {
-        const updatedUser = await response.json();
-        onProfileChange(updatedUser); // Update user in App.jsx
-        onClose(); // Close the modal
-      } else {
-        console.error("Error", response.status);
+        if (response.message) {
+          setErrors({
+            name: response.message.includes("Name") ? response.message : "",
+            avatar: response.message.includes("Avatar") ? response.message : "",
+          });
+        } else {
+          console.log("Successful Profile Edit");
+          onSubmit(values);
+          resetForm();
+          onClose();
+        }
+      } catch (error) {
+        console.error("An unexpected error occurred:", error);
       }
-    } catch (error) {
-      console.error("Error", error);
-    }
-  };
+    },
+  });
 
   return (
     <div>
       <ModalWithForm
         title="Edit Profile"
-        buttonText="Save"
+        buttonText="Save Changes"
         activeModal={activeModal}
         handleCloseClick={onClose}
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          formik.handleSubmit(e);
+        }}
+        isSubmitDisabled={!(formik.isValid && formik.dirty)}
+        modalType="profile-edit-modal"
       >
         <label className="modal__label" htmlFor="name">
           Name{" "}
           <input
             type="text"
             className="modal__input"
-            id="name"
-            value={name}
+            name="name"
+            id="edit-name"
+            value={formik.values.name}
             placeholder="Name"
-            onChange={handleNameChange}
+            onChange={formik.handleChange}
             required
           />
         </label>
         <label className="modal__label" htmlFor="avatar">
-          Email{" "}
+          Avatar{" "}
           <input
             type="url"
             className="modal__input"
-            id="avatar url"
+            id="avatar-Url"
             placeholder="image URL"
-            value={avatar}
-            onChange={handleAvatarChange}
+            name="avatar"
+            value={formik.values.avatar}
+            onChange={formik.handleChange}
             required
           />
         </label>

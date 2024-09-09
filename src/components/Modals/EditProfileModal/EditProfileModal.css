@@ -1,0 +1,8 @@
+.profile-edit-modal .modal__submit-btn {
+  width: 128px;
+  cursor: pointer;
+}
+
+.profile-edit-modal {
+  height: 304px;
+}

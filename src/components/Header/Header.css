@@ -43,6 +43,10 @@
   margin-left: 20px;
 }
 
+.header__add-clothes-btn:hover {
+  text-decoration: underline;
+}
+
 /* User Container */
 
 .header__user-container {

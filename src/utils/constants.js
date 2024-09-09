@@ -44,27 +44,27 @@ export const weatherOptions = [
   },
   {
     day: false,
-    condition: "cloudy",
+    condition: "clouds",
     url: new URL("../assets/Night/NightCloudy.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "rainy",
+    condition: "rain",
     url: new URL("../assets/Night/NightRainy.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "stormy",
+    condition: "storm",
     url: new URL("../assets/Night/NightStorm.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "snowy",
+    condition: "snow",
     url: new URL("../assets/Night/NightSnow.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "foggy",
+    condition: "fog",
     url: new URL("../assets/Night/NightFoggy.png", import.meta.url).href,
   },
 ];

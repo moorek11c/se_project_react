@@ -5,6 +5,29 @@ function getItems() {
   return fetch(`${baseUrl}/items`).then(handleResponse);
 }
 
+function addCardLike(_id, token) {
+  console.log("addCardLike");
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleResponse);
+}
+
+function removeCardLike(_id, token) {
+  console.log("removeCardLike");
+
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleResponse);
+}
+
 function addItem(item) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
@@ -26,4 +49,4 @@ function deleteItem(itemId) {
   }).then(handleResponse);
 }
 
-export { getItems, addItem, deleteItem };
+export { getItems, addCardLike, addItem, deleteItem, removeCardLike };
