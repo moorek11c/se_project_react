@@ -10,6 +10,7 @@ function EditProfileModal({ activeModal, onClose, onSubmit }) {
   const { currentUser } = useContext(currentUserContext);
 
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
       id: currentUser ? currentUser._id : "", // Initialize with current user ID
       name: currentUser ? currentUser.name : "", // Initialize with current user name
