@@ -7,12 +7,13 @@ import { useContext } from "react";
 import currentUserContext from "../../../Contexts/CurrentUserContext";
 
 function EditProfileModal({ activeModal, onClose, onSubmit }) {
-  const { _id } = useContext(currentUserContext);
+  const { currentUser } = useContext(currentUserContext);
+
   const formik = useFormik({
     initialValues: {
-      id: _id,
-      name: "",
-      avatar: "",
+      id: currentUser ? currentUser._id : "", // Initialize with current user ID
+      name: currentUser ? currentUser.name : "", // Initialize with current user name
+      avatar: currentUser ? currentUser.avatar : "", // Initialize with current user avatar
     },
     validationSchema: editProfileModalSchema,
     validateOnChange: true,
@@ -28,7 +29,6 @@ function EditProfileModal({ activeModal, onClose, onSubmit }) {
             avatar: response.message.includes("Avatar") ? response.message : "",
           });
         } else {
-          console.log("Successful Profile Edit");
           onSubmit(values);
           resetForm();
           onClose();

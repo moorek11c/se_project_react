@@ -1,5 +1,4 @@
 import { useContext } from "react";
-
 import "./ItemCard.css";
 import cardLikeBtn from "../../../assets/images/Like button.svg";
 import unLike from "../../../assets/images/unLikeBtn.svg";
@@ -16,7 +15,12 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
     onCardLike({ _id: item._id, isLiked: isLiked });
   };
 
-  const isLiked = item.likes.some((id) => id === currentUser._id);
+  // Check if item.likes exists, user is logged in, and likes should be shown
+  const isLiked =
+    isLoggedIn &&
+    Array.isArray(item.likes) &&
+    item.likes.some((id) => id === currentUser._id);
+
   const itemLikeButton = `card__like-btn ${
     isLiked ? "card__like-btn_active" : ""
   }`;
@@ -25,7 +29,7 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
     <li className="card">
       <div className="card__description">
         <h2 className="card__title">{item.name}</h2>
-        {isLoggedIn && (
+        {isLoggedIn && item.likes && (
           <img
             onClick={handleLike}
             className={itemLikeButton}

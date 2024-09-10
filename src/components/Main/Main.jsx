@@ -4,6 +4,7 @@ import WeatherCard from "./WeatherCard/WeatherCard.jsx";
 import ItemCard from "../Main/ItemCard/ItemCard.jsx";
 import CurrentTemperatureUnitContext from "../../Contexts/CurrentTemperatureUnitContext.jsx";
 import { getWeatherType } from "../../utils/weatherApi.js";
+import { defaultClothingItems } from "../../utils/constants.js";
 
 function Main({
   weatherData,
@@ -23,8 +24,9 @@ function Main({
   const temperature =
     currentTemperatureUnit === "F" ? result.temp.F : result.temp.C;
 
-  const filteredClothingItems = isLoggedIn ? clothingItems : [];
-
+  const filteredClothingItems = isLoggedIn
+    ? clothingItems
+    : defaultClothingItems;
   return (
     <main>
       <WeatherCard weatherData={result} />
@@ -39,15 +41,12 @@ function Main({
               return item.weather === result.type[currentTemperatureUnit];
             })
             .map((item) => {
-              console.log(item);
-
               return (
                 <ItemCard
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
                   onCardLike={onCardLike}
-                  isLoggedIn={isLoggedIn}
                 />
               );
             })}

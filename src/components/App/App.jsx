@@ -354,7 +354,6 @@ function App() {
           <EditProfileModal
             activeModal={activeModal === "edit-profile"}
             onClose={closeActiveModal}
-            currentUser={currentUser}
             onSubmit={handleProfileChange}
           />
         </div>
