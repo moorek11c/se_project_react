@@ -71,7 +71,7 @@ export const checkToken = async () => {
 };
 
 // edit profile
-export const editProfile = async () => {
+export const editProfile = async ({ name, avatar }) => {
   const token = localStorage.getItem("token");
   if (!token) {
     console.log("Token is not provided");
@@ -80,7 +80,7 @@ export const editProfile = async () => {
   const response = await fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: getAuthHeaders(),
-    body: JSON.stringify(),
+    body: JSON.stringify({ name, avatar }),
   });
 
   return handleResponse(response);

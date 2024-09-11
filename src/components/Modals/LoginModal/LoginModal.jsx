@@ -52,7 +52,7 @@ function LoginModal({ activeModal, onClose, onSubmit, openSignup }) {
       isSubmitDisabled={!(formik.isValid && formik.dirty)} // Disable when form is not valid or not dirty
       modalType="login-modal"
     >
-      <label className="modal__label" htmlFor="email">
+      <label className="modal__label" htmlFor="email-login">
         Email{" "}
         <input
           type="email"
@@ -71,7 +71,7 @@ function LoginModal({ activeModal, onClose, onSubmit, openSignup }) {
           <span className="modal__error">{formik.errors.email}</span>
         )}
       </label>
-      <label className="modal__label" htmlFor="password">
+      <label className="modal__label" htmlFor="password-login">
         Password{" "}
         <input
           type="password"

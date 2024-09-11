@@ -67,7 +67,7 @@ function SignUpModal({ activeModal, onClose, onSubmit, openLogin }) {
           <span className="modal__error">{formik.errors.email}</span>
         )}
       </label>
-      <label className="modal__label" htmlFor="password">
+      <label className="modal__label" htmlFor="password-signup">
         Password{" "}
         <input
           type="password"
@@ -88,7 +88,7 @@ function SignUpModal({ activeModal, onClose, onSubmit, openLogin }) {
           <span className="modal__error">{formik.errors.password}</span>
         )}
       </label>
-      <label className="modal__label" htmlFor="name">
+      <label className="modal__label" htmlFor="name-signup">
         Name{" "}
         <input
           type="text"
