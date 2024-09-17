@@ -39,6 +39,8 @@ export const register = async ({ name, avatar, email, password }) => {
 
 // authorize
 export const authorize = async (email, password) => {
+  console.log("Authorizing...");
+
   const response = await fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
@@ -52,10 +54,7 @@ export const authorize = async (email, password) => {
 // check token
 export const checkToken = async () => {
   const token = localStorage.getItem("token");
-
-  if (!token) {
-    return Promise.reject("No token provided");
-  }
+  if (!token) throw new Error("Token is not provided");
 
   try {
     const response = await fetch(`${BASE_URL}/users/me`, {

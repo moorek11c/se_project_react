@@ -105,6 +105,7 @@ function App() {
       if (data.token) {
         // Save token to localStorage
         localStorage.setItem("token", data.token);
+        console.log(data.token);
 
         // Ensure data.user exists and is a valid user object
         const user = data.user || null;
