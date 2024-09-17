@@ -16,8 +16,11 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onSubmit }) {
     validateOnBlur: true,
 
     onSubmit: async (values, { setErrors, resetForm }) => {
+      console.log("Form submitted with values:", values);
+
       try {
         const response = await addItem(values);
+        console.log("Item added:", response);
 
         if (response.message) {
           setErrors({
@@ -30,7 +33,7 @@ function AddItemModal({ activeModal, onClose, onAddClothesClick, onSubmit }) {
               : "",
           });
         } else {
-          onSubmit(values);
+          onSubmit(response);
           resetForm();
           onClose();
         }

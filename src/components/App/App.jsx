@@ -18,7 +18,6 @@ import AddItemModal from "../Modals/AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import {
   getItems,
-  addItem,
   deleteItem,
   addCardLike,
   removeCardLike,
@@ -71,17 +70,19 @@ function App() {
   // setIsLoggedIn is set to true
 
   useEffect(() => {
-    const validateToken = async () => {
-      try {
-        const data = await auth.checkToken();
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    auth
+
+      .checkToken()
+      .then((data) => {
         setCurrentUser(data);
         setIsLoggedIn(true);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    validateToken();
+      })
+      .catch((err) => {
+        console.error("Token validation error:", err);
+      });
   }, []);
 
   // Logging in
@@ -105,7 +106,6 @@ function App() {
       if (data.token) {
         // Save token to localStorage
         localStorage.setItem("token", data.token);
-        console.log(data.token);
 
         // Ensure data.user exists and is a valid user object
         const user = data.user || null;
@@ -182,22 +182,6 @@ function App() {
     closeActiveModal();
   };
 
-  // Add a new item to the profile page and the database
-  // addItem is called from the api.js file
-  // addItem successfully returns the data in then()
-  // setClothingItems is called with the data and the clothingItems state is set
-
-  const handleAddItemSubmit = (item) => {
-    return addItem(item)
-      .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
-        closeActiveModal();
-      })
-      .catch((err) => {
-        console.error("Error adding item:", err);
-      });
-  };
-
   // delete a card from the profile page and the database by id
   // deleteItem is called from the api.js file
   // deleteItem successfully returns the data in then()
@@ -252,8 +236,19 @@ function App() {
       .then((data) => {
         setClothingItems(data);
       })
-      .catch(console.error);
+
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
+
+  // handleAddItem
+
+  const handleAddItem = (newItem) => {
+    setClothingItems((prevItems) => [newItem, ...prevItems]);
+  };
+
+  // handleCardLike
 
   const handleCardLike = ({ _id, isLiked }) => {
     const token = localStorage.getItem("token");
@@ -290,11 +285,9 @@ function App() {
                 path="/"
                 element={
                   <Main
-                    isLoggedIn={isLoggedIn}
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
-                    handleAddItemSubmit={handleAddItemSubmit}
                     onCardLike={handleCardLike}
                   />
                 }
@@ -338,7 +331,7 @@ function App() {
           <AddItemModal
             activeModal={activeModal === "add-garment"}
             onClose={closeActiveModal}
-            onSubmit={handleAddItemSubmit}
+            onSubmit={handleAddItem}
           />
           <SignUpModal
             activeModal={activeModal === "sign-up"}

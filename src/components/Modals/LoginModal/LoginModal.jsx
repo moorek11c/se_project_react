@@ -45,7 +45,6 @@ function LoginModal({ activeModal, onClose, onSubmit, openSignup }) {
       activeModal={activeModal}
       handleCloseClick={onClose}
       onSubmit={(e) => {
-        console.log("Form Submit Triggered");
         e.preventDefault();
         formik.handleSubmit(e);
       }}

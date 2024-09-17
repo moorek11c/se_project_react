@@ -39,8 +39,6 @@ export const register = async ({ name, avatar, email, password }) => {
 
 // authorize
 export const authorize = async (email, password) => {
-  console.log("Authorizing...");
-
   const response = await fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
