@@ -18,6 +18,7 @@ import AddItemModal from "../Modals/AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import {
   getItems,
+  addItem,
   deleteItem,
   addCardLike,
   removeCardLike,
@@ -106,6 +107,7 @@ function App() {
       if (data.token) {
         // Save token to localStorage
         localStorage.setItem("token", data.token);
+        console.log(data.token);
 
         // Ensure data.user exists and is a valid user object
         const user = data.user || null;
@@ -285,11 +287,11 @@ function App() {
                 path="/"
                 element={
                   <Main
+                    isLoggedIn={isLoggedIn}
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     onCardLike={handleCardLike}
-                    isLoggedIn={isLoggedIn}
                   />
                 }
               ></Route>
