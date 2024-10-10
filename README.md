@@ -6,6 +6,22 @@
 
 This project consists of both a front-end (this repository) and a back-end, which handles the database and API logic. The back-end repository can be found [here](https://github.com/moorek11c/se_project_express.git).
 
+## Table of Contents
+
+## Screenshots
+
+### Home Page
+
+![Home Page](./src/assets/ReadMeImages/main.png)
+
+### Login Modal
+
+![Login Modal](./src/assets/ReadMeImages/login.png)
+
+### Sign Up Modal
+
+![Sign Up Modal](./src/assets/ReadMeImages/signup.png)
+
 ## Features
 
 - Fetches current weather data using a weather API.
@@ -14,13 +30,13 @@ This project consists of both a front-end (this repository) and a back-end, whic
 - Manages user authentication for logging in and managing their clothing collection.
 - Uses a modal for user interactions, such as login and adding new items.
 
-## Technologies Used
-
-- **React**: For building the front-end user interface.
-- **Context API**: For global state management.
-- **MongoDB**: For storing user-uploaded clothing items, and storing users who create an account.
-- **Node.js** & **Express**: Back-end API logic (see [back-end repo](https://github.com/moorek11c/se_project_express.git)).
-
 ## Go to Website
 
 [here](https://checkwtwtoday.crabdance.com/).
+
+## Instructions on deployment
+
+1. Clone the repository.
+2. Run `npm install` to install the necessary dependencies.
+3. Run `npm start` to start the development server.
+4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

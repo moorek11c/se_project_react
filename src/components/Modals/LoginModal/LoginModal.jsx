@@ -96,7 +96,7 @@ function LoginModal({ activeModal, onClose, onSubmit, openSignup }) {
         type="button"
         className="modal__button_signup"
       >
-        or Sign Up
+        {/* or Sign up link */}
       </button>
     </ModalWithForm>
   );
