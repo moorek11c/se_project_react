@@ -12,15 +12,15 @@ This project consists of both a front-end (this repository) and a back-end, whic
 
 ### Home Page
 
-![Home Page](./src/assets/ReadMeImages/main.png)
+![Home Page](./ReadMeImages/main.png)
 
 ### Login Modal
 
-![Login Modal](./src/assets/ReadMeImages/login.png)
+![Login Modal](./ReadMeImages/login.png)
 
 ### Sign Up Modal
 
-![Sign Up Modal](./src/assets/ReadMeImages/signup.png)
+![Sign Up Modal](./sign-up.png)
 
 ## Features
 
