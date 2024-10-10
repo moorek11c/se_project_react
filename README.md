@@ -20,7 +20,7 @@ This project consists of both a front-end (this repository) and a back-end, whic
 
 ### Sign Up Modal
 
-![Sign Up Modal](./sign-up.png)
+![Sign Up Modal](./ReadMeImages/sign-up.png)
 
 ## Features
 
